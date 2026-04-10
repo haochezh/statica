@@ -1,0 +1,19 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# caches & envs
+__pycache__/
+.venv/
+venv/
+node_modules/
+.ipynb_checkpoints/
+
+# secrets - never commit
+.env
+.env.*
+!.env.example
+
+# backfill tooling
+.backfill_plan.json
