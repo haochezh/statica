@@ -63,7 +63,9 @@
     "./logger": "./logger.ts",
     "./utils": "./utils.ts",
     "./constants/*": "./constants/*.ts",
-    "./platform": "./platform/index.ts"
+    "./platform": "./platform/index.ts",
+    "./integrations": "./integrations/index.ts",
+    "./integrations/*": "./integrations/*.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "catalog:",
