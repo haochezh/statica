@@ -1,6 +1,6 @@
-# Robinhood Chain and pons integration
+# Robinhood Chain and Pons integration
 
-This guide covers Statica's shared Robinhood Chain integration and its support for both generations of the pons launch protocol.
+This guide covers Statica's shared Robinhood Chain integration and its support for both generations of the Pons launch protocol.
 
 ## Scope
 
@@ -9,7 +9,7 @@ The integration lives in `@statica/core/integrations` and contains no wallet-spe
 | Module | Purpose |
 | --- | --- |
 | `robinhood-chain` | Chain definitions, Stock Token API client, ERC-8056 helpers, and Chainlink ABI |
-| `pons-contracts` | Versioned pons deployment addresses and minimal contract interfaces |
+| `pons-contracts` | Versioned Pons deployment addresses and minimal contract interfaces |
 | `pons` | v1 state access, v2 launch/trade operations, and deterministic quote math |
 | `evm` | Small transport boundary for contract reads and wallet-signed writes |
 
@@ -52,9 +52,9 @@ const transport: EvmTransport = {
 
 Omit `writeContract` for read-only agents. Any launch or trade attempt through that transport will fail before requesting a signature.
 
-## pons v1
+## Pons v1
 
-pons v1 launches directly into locked Uniswap v3 pools. New and legacy factory addresses remain relevant because deployed contracts are immutable.
+Pons v1 launches directly into locked Uniswap v3 pools. New and legacy factory addresses remain relevant because deployed contracts are immutable.
 
 ```ts
 import { PonsV1Client, ponsV1PriceRatio } from "@statica/core/integrations";
@@ -68,9 +68,9 @@ const ratio = ponsV1PriceRatio(sqrtPriceX96, launch.isToken0);
 
 For discovery, index each factory's `TokenLaunched` event from its documented start block, then index each emitted pool's `Swap` events. Backfill in bounded ranges because the public RPC may reject wide `eth_getLogs` requests. v1 trades route through the listed Uniswap v3 router and quoter.
 
-## pons v2
+## Pons v2
 
-pons v2 starts each launch on a bonding curve and graduates it into a permanently locked Uniswap v4 pool. The launch record's `phase` is authoritative:
+Pons v2 starts each launch on a bonding curve and graduates it into a permanently locked Uniswap v4 pool. The launch record's `phase` is authoritative:
 
 - `0` — trade on the curve.
 - `1` — swept; pool creation is pending.
@@ -156,5 +156,5 @@ Custom-pair amounts must use the quote asset's own decimals. Once a launch reach
 
 - [Robinhood Chain documentation](https://docs.robinhood.com/chain/)
 - [Robinhood Stock Token APIs](https://docs.robinhood.com/chain/stock-token-apis/)
-- [pons v1 documentation](https://docs.ponsfamily.com/)
-- [pons v2 documentation](https://docs.ponsfamily.com/v2)
+- [Pons v1 documentation](https://docs.ponsfamily.com/)
+- [Pons v2 documentation](https://docs.ponsfamily.com/v2)
